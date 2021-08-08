@@ -27,6 +27,27 @@ java -cp .;zendesk-1.0.0-RELEASE.jar;C:\construction\maven_repository\org\apache
 
 # Assumptions
 
+# Scenarios to Unit Test / Integration Test
+## Search by User attributes having tickets associated to user
+### 1 Search by 'created_at'
+### 2 Search by 'name'
+### 3 Search by 'verified'
+### 4 Search by '_id'
+
+## Search by User attributes having NO tickets associated to user
+### 1 Search by 'created_at'
+### 2 Search by 'name'
+### 3 Search by 'verified'
+### 4 Search by '_id'
+
+## Search by Ticket attributes having users assigned to ticket
+### 1 Search by '_id'
+### 2 Search by 'created_at'
+### 3 Search by 'type'
+### 4 Search by 'subject'
+### 5 Search by 'assignee_id'
+### 6 Search by 'tags'
+
 # Notes
 ## 1
 To read json data have used GSON Library
@@ -46,5 +67,28 @@ Using the method next is giving wierd results for subsequent scanned inputs
 So have used 'nextLine' to capture user input
 https://stackoverflow.com/questions/13102045/scanner-is-skipping-nextline-after-using-next-or-nextfoo
 
+# TODO
+###1 
+Search by tag is not implemented
+
+###2
+add loggers
 
 
+
+###4
+Junits
+
+
+# DONE
+###1
+Need to prevent wrong entry while entering key and value
+
+###2
+Show results for searchable fields 
+
+###3
+No results found implementation 
+
+###4
+remove extra and unnecessary sys outs
