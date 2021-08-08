@@ -23,7 +23,7 @@ import com.zensearch.repo.TicketRepoImpl;
 import com.zensearch.repo.UserRepoImpl;
 
 @ExtendWith(MockitoExtension.class)
-class ServiceImplTest {
+class ServiceImplTicketSearchTest {
 	
 	@Mock
 	TicketRepoImpl ticketRepoImplMock; 
