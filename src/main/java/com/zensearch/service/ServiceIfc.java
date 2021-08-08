@@ -3,6 +3,7 @@ package com.zensearch.service;
 import java.util.List;
 
 import com.zensearch.pojo.Ticket;
+import com.zensearch.pojo.User;
 
 public interface ServiceIfc {
 	
@@ -21,4 +22,10 @@ public interface ServiceIfc {
 	List<Ticket> getTicketDisplayResults(String key,String value) ;
 	
 	List<Ticket> getTicketDisplayResults(String value) ;
+	
+	List <User> getUserDisplayResults(String key,String value) ;
+	
+	List <User> getUserDisplayResults(String value) ;
+	
+	
 }

@@ -154,17 +154,23 @@ public class ZendeskSolution {
 								isValidUserSearchCriteria(userKey)) {
 							
 							System.out.println("Searching users for " + userKey + " with a value of " + userValue);
-							List <User> userResults = new ArrayList<User>();							
+							List <User> userResults = new ArrayList<User>();
+							ServiceIfc service = new ServiceImpl(new TicketRepoImpl(),new UserRepoImpl());
 							if(userKey.trim().equals("_id")) {
 								/** this will be a simpler search without having to do convoluted extraction so handle separately **/
+								/**
 								userResults = getUserDisplayResults(userKey,userValue,masterTicketMap,
 										masterUserMap,masterSearchByTicketMap);
-								
+								**/
+								userResults = service.getUserDisplayResults(userValue);
 								
 							}else {
 								/** this involves going through various object graphs **/
+								/**
 								userResults = getUserDisplayResults(userKey,userValue,masterTicketMap,masterSearchByUserMap,
 										masterUserMap,masterSearchByTicketMap);
+								**/
+								userResults = service.getUserDisplayResults(userKey,userValue);
 							}
 
 							if(null == userResults || userResults.size() <= 0) {
@@ -370,72 +376,10 @@ public class ZendeskSolution {
 		return results;
 	}
 
-	private static List<Ticket> getTicketDisplayResults(String value,Map<String, Ticket> masterTicketMap,
-			Map<String, User> masterUserMap) {
-
-		/** if we find something return this list **/
-		List<Ticket> results = new ArrayList<Ticket>();
-
-		/** get Ticket details for the ticketId entered by user **/
-		Ticket ticket = masterTicketMap.get(value);
-
-		/** we may not get results if no such ticket exists handle it **/
-		if(null != ticket) {
-			/** now get the assigneeId - this can be null / empty **/
-			if(!StringUtils.isBlank(ticket.getAssigneeId())){
-				/** to populate assignee name **/
-				User user = masterUserMap.get(ticket.getAssigneeId());
-				if(null != user) {
-					ticket.setAssigneeName(user.getName());
-				}					
-			}else {				
-			}
-			/** now add the found ticket to results **/
-			results.add(ticket);
-		}else {			
-		}
-		return results;
-	}
+	
 
 
-	private static List<Ticket> getTicketDisplayResults(String key,String value,Map<String, Ticket> masterTicketMap,
-			Map<String,Map<String,List<String>>> masterSearchMap,Map<String, User> masterUserMap) {
-
-		/** if we find something return this list **/
-		List<Ticket> results = new ArrayList<Ticket>();
-
-		
-		/** #1 using search key determine which map needs to be searched  */
-		Map<String,List<String>> mapToSearch = masterSearchMap.get(key);
-
-		/** #2 extract from this map using the search value as key of this map **/
-		List<String> ticketIdList = mapToSearch.get(value);
-
-		/** #3 we may or may not get any search results **/
-		if(null != ticketIdList && ticketIdList.size() > 0) {
-
-			/** #4 	so at this moment we have the list of ticket ids that match the search criteria  
-			 *  	Get all the tickets  for given ticket ids 
-			 *      Get assigneeId for each ticketid
-			 *      Extract assignee name using assigneeId 
-			 *      Populate this assignee name 
-			 *      return results
-			 **/
-			ticketIdList.forEach((ticketId) -> {
-				Ticket ticket = masterTicketMap.get(ticketId);
-				/** now get the assigneeId - this can be null / empty **/
-				if(!StringUtils.isBlank(ticket.getAssigneeId())){
-					/** to populate assignee name **/
-					User user = masterUserMap.get(ticket.getAssigneeId());
-					if(null != user) {
-						ticket.setAssigneeName(user.getName());
-					}					
-				}
-				results.add(ticket);				
-			});
-		}
-		return results;
-	}
+	
 
 
 	private static Map<String, List<String>> transformUserListToMapOfVerification(List<User> userList) {
