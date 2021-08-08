@@ -72,8 +72,6 @@ https://stackoverflow.com/questions/13102045/scanner-is-skipping-nextline-after-
 ###2
 add loggers
 
-
-
 ###4
 Junits
 
