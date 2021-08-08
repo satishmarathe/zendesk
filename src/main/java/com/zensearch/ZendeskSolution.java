@@ -573,11 +573,15 @@ public class ZendeskSolution {
 
 	private static Map<String, List<String>> transformListToMapOfTags(List<Ticket> ticketList) {
 
+		Map < String, List< String > > mappedInfo = new HashMap <>();
 		
-		
-		
-		
-		return null;
+        for ( Ticket ticket : ticketList ) {
+        	 List<String> ticketTags = ticket.getTags();
+            for ( String tag : ticketTags ) {
+            	mappedInfo.computeIfAbsent( tag , k -> new ArrayList < String >() ).add( ticket.getId());
+            }
+        }		
+		return mappedInfo;
 	}
 
 	private static boolean isValidUserSearchCriteria(String searchableField) {

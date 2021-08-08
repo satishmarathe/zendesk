@@ -68,8 +68,6 @@ So have used 'nextLine' to capture user input
 https://stackoverflow.com/questions/13102045/scanner-is-skipping-nextline-after-using-next-or-nextfoo
 
 # TODO
-###1 
-Search by tag is not implemented
 
 ###2
 add loggers
@@ -92,3 +90,6 @@ No results found implementation
 
 ###4
 remove extra and unnecessary sys outs
+
+###5 
+Search by tag implemented
