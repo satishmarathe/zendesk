@@ -20,6 +20,10 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.zensearch.pojo.Ticket;
 import com.zensearch.pojo.User;
+import com.zensearch.repo.TicketRepoImpl;
+import com.zensearch.repo.UserRepoImpl;
+import com.zensearch.service.ServiceIfc;
+import com.zensearch.service.ServiceImpl;
 
 
 
@@ -34,7 +38,9 @@ public class ZendeskSolution {
 
 	public static void main(String[] args) {
 		logger.info("start");
-
+		
+		
+		
 		/** First we need to read both files i.e. tickets and users **/
 		/** Second Take user inputs and handle them **/
 		/** In case of an empty file or file not found - log errors to log and let user know something is wrong **/
@@ -148,12 +154,13 @@ public class ZendeskSolution {
 								isValidUserSearchCriteria(userKey)) {
 							
 							System.out.println("Searching users for " + userKey + " with a value of " + userValue);
-							List <User> userResults = new ArrayList<User>();
+							List <User> userResults = new ArrayList<User>();							
 							if(userKey.trim().equals("_id")) {
 								/** this will be a simpler search without having to do convoluted extraction so handle separately **/
 								userResults = getUserDisplayResults(userKey,userValue,masterTicketMap,
 										masterUserMap,masterSearchByTicketMap);
-
+								
+								
 							}else {
 								/** this involves going through various object graphs **/
 								userResults = getUserDisplayResults(userKey,userValue,masterTicketMap,masterSearchByUserMap,
@@ -183,14 +190,22 @@ public class ZendeskSolution {
 							System.out.println("Searching tickets for " + ticketKey + " with a value of " + ticketValue);
 							
 							List <Ticket> ticketResults = new ArrayList<Ticket>();
+							ServiceIfc service = new ServiceImpl(new TicketRepoImpl(),new UserRepoImpl());
+							
 							if(ticketKey.trim().equals("_id")) {
 								/** this will be a simpler search without having to do convoluted extraction so handle separately **/
+								/**
 								ticketResults = getTicketDisplayResults(ticketValue,masterTicketMap,
 										masterUserMap);
+								**/
+								ticketResults = service.getTicketDisplayResults(ticketValue);
 							}else {
 								/** this involves going through various object graphs **/
+								/**
 								ticketResults = getTicketDisplayResults(ticketKey,ticketValue,masterTicketMap,masterSearchByTicketMap,
 										masterUserMap);
+								**/
+								ticketResults = service.getTicketDisplayResults(ticketKey,ticketValue);
 							}						
 							if(null == ticketResults || ticketResults.size() <= 0) {
 								/** no search results , let user know and terminate programme **/
