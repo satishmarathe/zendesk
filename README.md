@@ -27,7 +27,7 @@ gson-2.8.7.jar
 commons-lang3-3.12.0.jar
 
 Example:
-java -cp .;zendesk-1.0.0-RELEASE.jar;C:\maven_repository\log4j-api-2.14.0.jar;C:\\maven_repository\log4j-core-2.14.0.jar;C:\maven_repository\commons-io-2.11.0.jar;C:\maven_repository\gson-2.8.7.jar;C:\maven_repository\commons-lang3-3.12.0.jar  com.zensearch.ZendeskSolution
+java -cp .;zendesk-1.0.0-RELEASE.jar;C:\construction\maven_repository\org\apache\logging\log4j\log4j-api\2.14.0\log4j-api-2.14.0.jar;C:\construction\maven_repository\org\apache\logging\log4j\log4j-core\2.14.0\log4j-core-2.14.0.jar;C:\construction\maven_repository\commons-io\commons-io\2.11.0\commons-io-2.11.0.jar;C:\construction\maven_repository\com\google\code\gson\gson\2.8.7\gson-2.8.7.jar;C:\construction\maven_repository\org\apache\commons\commons-lang3\3.12.0\commons-lang3-3.12.0.jar  com.zensearch.ZendeskSolution
 
 
 
