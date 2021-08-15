@@ -19,9 +19,11 @@ import com.zensearch.service.ServiceImpl;
 
 public class ZendeskSolution {
 
-	private static final Logger logger = LogManager.getLogger(ZendeskSolution.class);
 	
-	private static final String MENU_ONE = "1";
+	private static final String MENU_SEARCH_ZENDESK = "1";
+	private static final String MENU_SEARCH_USERS = "1";
+	private static final String MENU_SEARCH_TICKETS = "2";
+	
 	private static final String MENU_TWO = "2";
 	private static final String MENU_QUIT = "quit";
 	
@@ -47,10 +49,10 @@ public class ZendeskSolution {
 				System.out.println( "* Type 'quit' to exit");
 				System.out.println();
 				userInput = scan.nextLine();
-				if(userInput.trim().equals(MENU_ONE)) {
+				if(userInput.trim().equals(MENU_SEARCH_ZENDESK)) {
 					System.out.println("Select 1) Users or 2) Tickets");
 					userInput = scan.nextLine();
-					if(userInput.trim().equals(MENU_ONE)) {
+					if(userInput.trim().equals(MENU_SEARCH_USERS)) {
 						System.out.println("Enter search term");
 						String userKey = scan.nextLine();
 						System.out.println("Enter search value");
@@ -86,13 +88,13 @@ public class ZendeskSolution {
 							}else {
 								System.out.println(userResults);
 							}
-							break;
+							//break;
 						}else {
 							System.out.println("invalid search criteria for User search ! ");
 							System.out.println(" ");
 						}
 						
-					}else if(userInput.trim().equals(MENU_TWO)) {
+					}else if(userInput.trim().equals(MENU_SEARCH_TICKETS)) {
 						System.out.println("Enter search term");
 						String ticketKey = scan.nextLine();
 						System.out.println("Enter search value");
@@ -128,7 +130,7 @@ public class ZendeskSolution {
 							}else {
 								System.out.println(ticketResults);
 							}	
-							break;
+							//break;
 						}else {
 							System.out.println("invalid search criteria for Ticket search! ");
 							System.out.println(" ");
